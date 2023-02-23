@@ -1,0 +1,79 @@
+#include <GL/glut.h>
+
+    // Global variables
+    float scale_factor = 1.0f;
+    float angle = 0.0f;
+
+    // Display function
+    void display() {
+    // Clear the screen
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Save the current transformation matrix
+    glPushMatrix();
+    // Rotate the object
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
+
+    // Scale the object
+    glScalef(scale_factor, scale_factor, 1.0f);
+    // glTranslatef(scale_factor,scale_factor,1.0f);
+
+
+
+    // Draw the object
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex2f(0.0f, 0.3f);
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex2f(-0.3f, -0.3f);
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex2f(0.3f, -0.3f);
+    glEnd();
+
+    // Restore the transformation matrix
+    glPopMatrix();
+
+    // Swap the buffers
+    glFlush();
+    // glutSwapBuffers();
+    }
+
+    // Idle function
+    void idle() {
+    // Update the scale and angle
+    scale_factor += 0.001f;
+    angle += 2.0f;
+
+    // Redraw the scene
+    glutPostRedisplay();
+    }
+
+    // Main function
+    int main(int argc, char** argv) {
+    // Initialize GLUT
+    glutInit(&argc, argv);
+    // glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowSize(640, 480);
+    glutCreateWindow("Scaling and Rotation");
+
+    // Set the background color
+    // glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+    // Set the projection matrix
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-1.0f, 1.0f, -1.0f, 1.0f);
+
+    // Set the modelview matrix
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    // Register the display and idle functions
+    glutDisplayFunc(display);
+    glutIdleFunc(idle);
+
+    // Start the main loop
+    glutMainLoop();
+
+    return 0;
+    }
