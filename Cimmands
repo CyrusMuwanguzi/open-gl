@@ -1,0 +1,4 @@
+sudo apt install mesa-utils
+sudo apt-get install freeglut3-dev
+
+g++ filename .cpp -no filename -lglut lGL -lGLU
