@@ -1,7 +1,5 @@
-#include<windows.h>
-#include<GL/glu.h>
-#include<GL/glut.h>
-#include <stdio.h>
+#include <GL/glut.h>
+#include <cmath>
 
 GLfloat R,px,py;
 
